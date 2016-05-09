@@ -4,14 +4,6 @@
 
 #include "parse.h"
 
-struct ModifyStringOptions
-{
-    //Expression Data File
-    std::string expression;
-    //mRNA Sequences File
-    std::string sequences;
-    double cutoff;
-};
 
 //parser-Function
 seqan::ArgumentParser::ParseResult
@@ -29,6 +21,10 @@ parseCommandLine(ModifyStringOptions & options, int argc, char const ** argv)
     //cutoff
     addArgument(parser, seqan::ArgParseArgument(
         seqan::ArgParseArgument::DOUBLE, "CUTOFF"));
+    
+    //filename expression List with attached mRNA sequences
+    addArgument(parser, seqan::ArgParseArgument(
+        seqan::ArgParseArgument::STRING, "TRANSCRIPTOME"));
 
     //Parse command line.
     seqan::ArgumentParser::ParseResult res = seqan::parse(parser, argc, argv);
@@ -42,6 +38,7 @@ parseCommandLine(ModifyStringOptions & options, int argc, char const ** argv)
     getArgumentValue(options.expression, parser, 0);
     getArgumentValue(options.sequences, parser, 1);
     getArgumentValue(options.cutoff, parser, 2);
+    getArgumentValue(options.transcriptome, parser, 3);
     
     return seqan::ArgumentParser::PARSE_OK;
 }
