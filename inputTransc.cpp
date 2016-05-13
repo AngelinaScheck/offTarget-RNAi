@@ -41,6 +41,12 @@ void getTransc (ModifyStringOptions & options, Transcriptome & transcripts){
             transcripts.genes.push_back(gene);
             transcripts.values.push_back(value);
             appendValue(transcripts.mRNAset, mRNA);
+            if(value< options.cutoff){
+                transcripts.isReg.push_back(false);
+            }
+            else{
+                transcripts.isReg.push_back(true);
+            }
         }
     }
     inTransc.close();
@@ -48,7 +54,7 @@ void getTransc (ModifyStringOptions & options, Transcriptome & transcripts){
 
 
 // split whole transcriptome: if mRNA expression meets cutoff -->regulated, else notRegulated
-void sortMRNA (ModifyStringOptions & options, Transcriptome & transcripts, Transcriptome & regulated, Transcriptome & notRegulated){
+void sortMRNA (Transcriptome & transcripts, Transcriptome & regulated, Transcriptome & notRegulated){
     //clear
     regulated.ids.clear();
     regulated.values.clear();
@@ -60,9 +66,13 @@ void sortMRNA (ModifyStringOptions & options, Transcriptome & transcripts, Trans
     notRegulated.genes.clear();
     clear(notRegulated.mRNAset);
     
-    //sort according to cutoff
+    //sort according to bool value in transcripts which was set according to cutoff
     for (int i=0; i<transcripts.ids.size(); i++){
-        if(transcripts.values[i] < options.cutoff){
+        if(transcripts.isReg[i]){
+            regulated.ids.push_back(transcripts.ids[i]);
+            regulated.genes.push_back(transcripts.genes[i]);
+            regulated.values.push_back(transcripts.values[i]);
+            appendValue(regulated.mRNAset, (getValue(transcripts.mRNAset, i)));
             notRegulated.ids.push_back(transcripts.ids[i]);
             notRegulated.genes.push_back(transcripts.genes[i]);
             notRegulated.values.push_back(transcripts.values[i]);
@@ -70,10 +80,10 @@ void sortMRNA (ModifyStringOptions & options, Transcriptome & transcripts, Trans
         }
         
         else{
-            regulated.ids.push_back(transcripts.ids[i]);
-            regulated.genes.push_back(transcripts.genes[i]);
-            regulated.values.push_back(transcripts.values[i]);
-            appendValue(regulated.mRNAset, (getValue(transcripts.mRNAset, i)));
+            notRegulated.ids.push_back(transcripts.ids[i]);
+            notRegulated.genes.push_back(transcripts.genes[i]);
+            notRegulated.values.push_back(transcripts.values[i]);
+            appendValue(notRegulated.mRNAset, (getValue(transcripts.mRNAset, i)));
         }
     }
     //error when no up/downregulated genes that fullfill cutoff criteria
@@ -81,4 +91,5 @@ void sortMRNA (ModifyStringOptions & options, Transcriptome & transcripts, Trans
         std::cerr << "no expression level meets cutoff" << '\n';
         return;
         }
+    std::cout << regulated.ids.size() << '\t' << "mRNAs affected by RNAi"<< '\n';
 }

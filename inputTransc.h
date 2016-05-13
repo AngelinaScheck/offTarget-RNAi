@@ -19,11 +19,12 @@ struct Transcriptome
     std::vector<std::string> genes;
     std::vector<float> values;
     seqan::StringSet<seqan::DnaString> mRNAset;
+    std::vector<bool> isReg;
     
 };
 
 void getTransc (ModifyStringOptions & options, Transcriptome & transcripts);
 
-void sortMRNA (ModifyStringOptions & options, Transcriptome & transcripts, Transcriptome & regulated, Transcriptome & notRegulated);
+void sortMRNA (Transcriptome & transcripts, Transcriptome & regulated, Transcriptome & notRegulated);
 
 #endif

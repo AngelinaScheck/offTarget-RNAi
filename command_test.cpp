@@ -4,6 +4,7 @@
 #include <sstream>
 #include <iostream>
 
+
 #include <seqan/sequence.h>
 #include <seqan/stream.h>
 
@@ -62,21 +63,21 @@ int main(int argc, char const ** argv)
     //mRNA not affected by RNAi
     Transcriptome notRegulated;
     //decide, if mRNA is up-/downregulated or not affected bei RNAi according to cutoff;
-    sortMRNA (options, transcripts, regulated, notRegulated);
-    std::cout<< regulated.ids.size()<< '\n';
+    sortMRNA (transcripts, regulated, notRegulated);;
     
     //generate kmers
     seqan::StringSet<seqan::DnaString> kmers;
     kmers=makeKmer(options.k);
-    std::cout<< length(kmers)<< '\n';
     
     //find kmers
     //initialization of Contingency Table
     std::vector<Contingency> contingencies;
+    contingencies.reserve(length(kmers));
     initializeCont(kmers, contingencies);
     //fill counters
-    countFinds (contingencies, kmers, regulated, notRegulated);
-    std::cout<< contingencies.size()<< '\n';
+    countFinds (contingencies, kmers, transcripts);
+    //fill empty fields of contingency tables
+    fillFields (contingencies, regulated, notRegulated);
 
 
     return 0;

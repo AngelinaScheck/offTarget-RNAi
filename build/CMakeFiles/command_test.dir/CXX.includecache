@@ -39,6 +39,8 @@ iostream
 -
 vector
 -
+algorithm
+-
 seqan/sequence.h
 -
 seqan/find.h
