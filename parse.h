@@ -6,12 +6,15 @@
 
 struct ModifyStringOptions
 {
-    //Expression Data File
-    std::string expression;
-    //mRNA Sequences File
-    std::string sequences;
-    double cutoff;
+
     std::string transcriptome;
+    double cutoff;
+    int k;
+    
+//     //Expression Data File
+//     std::string expression;
+//     //mRNA Sequences File
+//     std::string sequences;
 };
 
 seqan::ArgumentParser::ParseResult

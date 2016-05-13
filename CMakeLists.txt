@@ -27,7 +27,7 @@ add_definitions (${SEQAN_DEFINITIONS})
 # Add CXX flags found by find_package (SeqAn).
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${SEQAN_CXX_FLAGS}")
 # Add executable and link against SeqAn dependencies.
-add_executable (command_test command_test.cpp parse.cpp inputTransc.cpp)
+add_executable (command_test command_test.cpp parse.cpp inputTransc.cpp kmers.cpp countFinds.cpp)
 target_link_libraries (command_test ${SEQAN_LIBRARIES})
 
 # add_executable (parse parse.cpp)

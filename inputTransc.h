@@ -13,6 +13,17 @@
 
 #include "parse.h"
 
-void getTransc (ModifyStringOptions & options, std::vector<std::string> & Ids, std::vector<std::string> & Genes, std::vector<float> & Values, seqan::StringSet<seqan::DnaString> & mRNAset);
+struct Transcriptome
+{
+    std::vector<std::string> ids;
+    std::vector<std::string> genes;
+    std::vector<float> values;
+    seqan::StringSet<seqan::DnaString> mRNAset;
+    
+};
+
+void getTransc (ModifyStringOptions & options, Transcriptome & transcripts);
+
+void sortMRNA (ModifyStringOptions & options, Transcriptome & transcripts, Transcriptome & regulated, Transcriptome & notRegulated);
 
 #endif

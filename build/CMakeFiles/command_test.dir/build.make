@@ -118,11 +118,59 @@ CMakeFiles/command_test.dir/inputTransc.cpp.o.provides: CMakeFiles/command_test.
 
 CMakeFiles/command_test.dir/inputTransc.cpp.o.provides.build: CMakeFiles/command_test.dir/inputTransc.cpp.o
 
+CMakeFiles/command_test.dir/kmers.cpp.o: CMakeFiles/command_test.dir/flags.make
+CMakeFiles/command_test.dir/kmers.cpp.o: ../kmers.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/norbert/workspace/off-target-effects_Seqan/Coding/github/build/CMakeFiles $(CMAKE_PROGRESS_4)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/command_test.dir/kmers.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/command_test.dir/kmers.cpp.o -c /home/norbert/workspace/off-target-effects_Seqan/Coding/github/kmers.cpp
+
+CMakeFiles/command_test.dir/kmers.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/command_test.dir/kmers.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/norbert/workspace/off-target-effects_Seqan/Coding/github/kmers.cpp > CMakeFiles/command_test.dir/kmers.cpp.i
+
+CMakeFiles/command_test.dir/kmers.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/command_test.dir/kmers.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/norbert/workspace/off-target-effects_Seqan/Coding/github/kmers.cpp -o CMakeFiles/command_test.dir/kmers.cpp.s
+
+CMakeFiles/command_test.dir/kmers.cpp.o.requires:
+.PHONY : CMakeFiles/command_test.dir/kmers.cpp.o.requires
+
+CMakeFiles/command_test.dir/kmers.cpp.o.provides: CMakeFiles/command_test.dir/kmers.cpp.o.requires
+	$(MAKE) -f CMakeFiles/command_test.dir/build.make CMakeFiles/command_test.dir/kmers.cpp.o.provides.build
+.PHONY : CMakeFiles/command_test.dir/kmers.cpp.o.provides
+
+CMakeFiles/command_test.dir/kmers.cpp.o.provides.build: CMakeFiles/command_test.dir/kmers.cpp.o
+
+CMakeFiles/command_test.dir/countFinds.cpp.o: CMakeFiles/command_test.dir/flags.make
+CMakeFiles/command_test.dir/countFinds.cpp.o: ../countFinds.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/norbert/workspace/off-target-effects_Seqan/Coding/github/build/CMakeFiles $(CMAKE_PROGRESS_5)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/command_test.dir/countFinds.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/command_test.dir/countFinds.cpp.o -c /home/norbert/workspace/off-target-effects_Seqan/Coding/github/countFinds.cpp
+
+CMakeFiles/command_test.dir/countFinds.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/command_test.dir/countFinds.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/norbert/workspace/off-target-effects_Seqan/Coding/github/countFinds.cpp > CMakeFiles/command_test.dir/countFinds.cpp.i
+
+CMakeFiles/command_test.dir/countFinds.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/command_test.dir/countFinds.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/norbert/workspace/off-target-effects_Seqan/Coding/github/countFinds.cpp -o CMakeFiles/command_test.dir/countFinds.cpp.s
+
+CMakeFiles/command_test.dir/countFinds.cpp.o.requires:
+.PHONY : CMakeFiles/command_test.dir/countFinds.cpp.o.requires
+
+CMakeFiles/command_test.dir/countFinds.cpp.o.provides: CMakeFiles/command_test.dir/countFinds.cpp.o.requires
+	$(MAKE) -f CMakeFiles/command_test.dir/build.make CMakeFiles/command_test.dir/countFinds.cpp.o.provides.build
+.PHONY : CMakeFiles/command_test.dir/countFinds.cpp.o.provides
+
+CMakeFiles/command_test.dir/countFinds.cpp.o.provides.build: CMakeFiles/command_test.dir/countFinds.cpp.o
+
 # Object files for target command_test
 command_test_OBJECTS = \
 "CMakeFiles/command_test.dir/command_test.cpp.o" \
 "CMakeFiles/command_test.dir/parse.cpp.o" \
-"CMakeFiles/command_test.dir/inputTransc.cpp.o"
+"CMakeFiles/command_test.dir/inputTransc.cpp.o" \
+"CMakeFiles/command_test.dir/kmers.cpp.o" \
+"CMakeFiles/command_test.dir/countFinds.cpp.o"
 
 # External object files for target command_test
 command_test_EXTERNAL_OBJECTS =
@@ -130,6 +178,8 @@ command_test_EXTERNAL_OBJECTS =
 command_test: CMakeFiles/command_test.dir/command_test.cpp.o
 command_test: CMakeFiles/command_test.dir/parse.cpp.o
 command_test: CMakeFiles/command_test.dir/inputTransc.cpp.o
+command_test: CMakeFiles/command_test.dir/kmers.cpp.o
+command_test: CMakeFiles/command_test.dir/countFinds.cpp.o
 command_test: CMakeFiles/command_test.dir/build.make
 command_test: /usr/lib/x86_64-linux-gnu/libz.so
 command_test: CMakeFiles/command_test.dir/link.txt
@@ -143,6 +193,8 @@ CMakeFiles/command_test.dir/build: command_test
 CMakeFiles/command_test.dir/requires: CMakeFiles/command_test.dir/command_test.cpp.o.requires
 CMakeFiles/command_test.dir/requires: CMakeFiles/command_test.dir/parse.cpp.o.requires
 CMakeFiles/command_test.dir/requires: CMakeFiles/command_test.dir/inputTransc.cpp.o.requires
+CMakeFiles/command_test.dir/requires: CMakeFiles/command_test.dir/kmers.cpp.o.requires
+CMakeFiles/command_test.dir/requires: CMakeFiles/command_test.dir/countFinds.cpp.o.requires
 .PHONY : CMakeFiles/command_test.dir/requires
 
 CMakeFiles/command_test.dir/clean:

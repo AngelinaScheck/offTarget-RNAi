@@ -4,7 +4,6 @@
 #include <sstream>
 #include <iostream>
 
-#include <seqan/arg_parse.h>
 #include <seqan/sequence.h>
 #include <seqan/stream.h>
 
@@ -12,6 +11,8 @@
 #include "expLev.h"
 #include "matchMRNA.h"
 #include "inputTransc.h"
+#include "kmers.h"
+#include "countFinds.h"
 
 
 
@@ -51,17 +52,32 @@ int main(int argc, char const ** argv)
     //-----------------------------------------------------------------------------------------------------
     
     
-    //declarations for storing transcriptome
-    std::vector<std::string>  Ids;
-    std::vector<std::string> Genes;
-    std::vector<float> Values;
-    seqan::StringSet<seqan::DnaString> mRNAset;
+
     //read transcriptome data from table
-    getTransc (options, Ids, Genes, Values, mRNAset);
+    Transcriptome transcripts;
+    getTransc (options, transcripts);
     
+    //mRNA affected by RNAi
+    Transcriptome regulated;
+    //mRNA not affected by RNAi
+    Transcriptome notRegulated;
+    //decide, if mRNA is up-/downregulated or not affected bei RNAi according to cutoff;
+    sortMRNA (options, transcripts, regulated, notRegulated);
+    std::cout<< regulated.ids.size()<< '\n';
+    
+    //generate kmers
+    seqan::StringSet<seqan::DnaString> kmers;
+    kmers=makeKmer(options.k);
+    std::cout<< length(kmers)<< '\n';
+    
+    //find kmers
+    //initialization of Contingency Table
+    std::vector<Contingency> contingencies;
+    initializeCont(kmers, contingencies);
+    //fill counters
+    countFinds (contingencies, kmers, regulated, notRegulated);
+    std::cout<< contingencies.size()<< '\n';
 
 
     return 0;
-    
-
 }

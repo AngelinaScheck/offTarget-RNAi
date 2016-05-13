@@ -2,6 +2,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/command_test.dir/command_test.cpp.o"
   "CMakeFiles/command_test.dir/parse.cpp.o"
   "CMakeFiles/command_test.dir/inputTransc.cpp.o"
+  "CMakeFiles/command_test.dir/kmers.cpp.o"
+  "CMakeFiles/command_test.dir/countFinds.cpp.o"
   "command_test.pdb"
   "command_test"
 )

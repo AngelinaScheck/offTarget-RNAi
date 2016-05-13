@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = /home/norbert/workspace/off-target-effects_Seqan/Coding/githu
 CMakeFiles/command_test.dir/all:
 	$(MAKE) -f CMakeFiles/command_test.dir/build.make CMakeFiles/command_test.dir/depend
 	$(MAKE) -f CMakeFiles/command_test.dir/build.make CMakeFiles/command_test.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/norbert/workspace/off-target-effects_Seqan/Coding/github/build/CMakeFiles  1 2 3
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/norbert/workspace/off-target-effects_Seqan/Coding/github/build/CMakeFiles  1 2 3 4 5
 	@echo "Built target command_test"
 .PHONY : CMakeFiles/command_test.dir/all
 
@@ -69,7 +69,7 @@ all: CMakeFiles/command_test.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/command_test.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/norbert/workspace/off-target-effects_Seqan/Coding/github/build/CMakeFiles 3
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/norbert/workspace/off-target-effects_Seqan/Coding/github/build/CMakeFiles 5
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/command_test.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/norbert/workspace/off-target-effects_Seqan/Coding/github/build/CMakeFiles 0
 .PHONY : CMakeFiles/command_test.dir/rule

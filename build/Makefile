@@ -138,6 +138,30 @@ command_test.cpp.s:
 	$(MAKE) -f CMakeFiles/command_test.dir/build.make CMakeFiles/command_test.dir/command_test.cpp.s
 .PHONY : command_test.cpp.s
 
+countFinds.o: countFinds.cpp.o
+.PHONY : countFinds.o
+
+# target to build an object file
+countFinds.cpp.o:
+	$(MAKE) -f CMakeFiles/command_test.dir/build.make CMakeFiles/command_test.dir/countFinds.cpp.o
+.PHONY : countFinds.cpp.o
+
+countFinds.i: countFinds.cpp.i
+.PHONY : countFinds.i
+
+# target to preprocess a source file
+countFinds.cpp.i:
+	$(MAKE) -f CMakeFiles/command_test.dir/build.make CMakeFiles/command_test.dir/countFinds.cpp.i
+.PHONY : countFinds.cpp.i
+
+countFinds.s: countFinds.cpp.s
+.PHONY : countFinds.s
+
+# target to generate assembly for a file
+countFinds.cpp.s:
+	$(MAKE) -f CMakeFiles/command_test.dir/build.make CMakeFiles/command_test.dir/countFinds.cpp.s
+.PHONY : countFinds.cpp.s
+
 inputTransc.o: inputTransc.cpp.o
 .PHONY : inputTransc.o
 
@@ -161,6 +185,30 @@ inputTransc.s: inputTransc.cpp.s
 inputTransc.cpp.s:
 	$(MAKE) -f CMakeFiles/command_test.dir/build.make CMakeFiles/command_test.dir/inputTransc.cpp.s
 .PHONY : inputTransc.cpp.s
+
+kmers.o: kmers.cpp.o
+.PHONY : kmers.o
+
+# target to build an object file
+kmers.cpp.o:
+	$(MAKE) -f CMakeFiles/command_test.dir/build.make CMakeFiles/command_test.dir/kmers.cpp.o
+.PHONY : kmers.cpp.o
+
+kmers.i: kmers.cpp.i
+.PHONY : kmers.i
+
+# target to preprocess a source file
+kmers.cpp.i:
+	$(MAKE) -f CMakeFiles/command_test.dir/build.make CMakeFiles/command_test.dir/kmers.cpp.i
+.PHONY : kmers.cpp.i
+
+kmers.s: kmers.cpp.s
+.PHONY : kmers.s
+
+# target to generate assembly for a file
+kmers.cpp.s:
+	$(MAKE) -f CMakeFiles/command_test.dir/build.make CMakeFiles/command_test.dir/kmers.cpp.s
+.PHONY : kmers.cpp.s
 
 parse.o: parse.cpp.o
 .PHONY : parse.o
@@ -198,9 +246,15 @@ help:
 	@echo "... command_test.o"
 	@echo "... command_test.i"
 	@echo "... command_test.s"
+	@echo "... countFinds.o"
+	@echo "... countFinds.i"
+	@echo "... countFinds.s"
 	@echo "... inputTransc.o"
 	@echo "... inputTransc.i"
 	@echo "... inputTransc.s"
+	@echo "... kmers.o"
+	@echo "... kmers.i"
+	@echo "... kmers.s"
 	@echo "... parse.o"
 	@echo "... parse.i"
 	@echo "... parse.s"

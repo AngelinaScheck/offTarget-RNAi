@@ -9,22 +9,30 @@
 seqan::ArgumentParser::ParseResult
 parseCommandLine(ModifyStringOptions & options, int argc, char const ** argv)
 {
-    //ArgumentParser for reading the expression level table
-    seqan::ArgumentParser parser("readExp");
-
-    //filename for expression.txt
+        //ArgumentParser
+    seqan::ArgumentParser parser("input");
+    
+        //filename expression List with attached mRNA sequences
     addArgument(parser, seqan::ArgParseArgument(
-        seqan::ArgParseArgument::STRING, "EXPRESSION"));
-    //filename for mRNA sequences.txt
-    addArgument(parser, seqan::ArgParseArgument(
-        seqan::ArgParseArgument::STRING, "SEQUENCES"));
+        seqan::ArgParseArgument::STRING, "TRANSCRIPTOME"));
+    
     //cutoff
     addArgument(parser, seqan::ArgParseArgument(
         seqan::ArgParseArgument::DOUBLE, "CUTOFF"));
     
-    //filename expression List with attached mRNA sequences
+    //k for kmers
     addArgument(parser, seqan::ArgParseArgument(
-        seqan::ArgParseArgument::STRING, "TRANSCRIPTOME"));
+        seqan::ArgParseArgument::INTEGER, "k"));
+    
+    
+//         //filename for expression.txt
+//     addArgument(parser, seqan::ArgParseArgument(
+//         seqan::ArgParseArgument::STRING, "EXPRESSION"));
+//     
+//     //filename for mRNA sequences.txt
+//     addArgument(parser, seqan::ArgParseArgument(
+//         seqan::ArgParseArgument::STRING, "SEQUENCES"));
+    
 
     //Parse command line.
     seqan::ArgumentParser::ParseResult res = seqan::parse(parser, argc, argv);
@@ -35,10 +43,11 @@ parseCommandLine(ModifyStringOptions & options, int argc, char const ** argv)
         return res;
    
     //assign parsed arguments
-    getArgumentValue(options.expression, parser, 0);
-    getArgumentValue(options.sequences, parser, 1);
-    getArgumentValue(options.cutoff, parser, 2);
-    getArgumentValue(options.transcriptome, parser, 3);
+    getArgumentValue(options.transcriptome, parser, 0);
+    getArgumentValue(options.cutoff, parser, 1);
+    getArgumentValue(options.k, parser, 2);
+//  getArgumentValue(options.expression, parser, 3);
+//  getArgumentValue(options.sequences, parser, 4);
     
     return seqan::ArgumentParser::PARSE_OK;
 }
