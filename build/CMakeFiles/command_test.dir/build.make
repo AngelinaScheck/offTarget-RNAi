@@ -164,13 +164,37 @@ CMakeFiles/command_test.dir/countFinds.cpp.o.provides: CMakeFiles/command_test.d
 
 CMakeFiles/command_test.dir/countFinds.cpp.o.provides.build: CMakeFiles/command_test.dir/countFinds.cpp.o
 
+CMakeFiles/command_test.dir/fisher.cpp.o: CMakeFiles/command_test.dir/flags.make
+CMakeFiles/command_test.dir/fisher.cpp.o: ../fisher.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/norbert/workspace/off-target-effects_Seqan/Coding/github/build/CMakeFiles $(CMAKE_PROGRESS_6)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/command_test.dir/fisher.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/command_test.dir/fisher.cpp.o -c /home/norbert/workspace/off-target-effects_Seqan/Coding/github/fisher.cpp
+
+CMakeFiles/command_test.dir/fisher.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/command_test.dir/fisher.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/norbert/workspace/off-target-effects_Seqan/Coding/github/fisher.cpp > CMakeFiles/command_test.dir/fisher.cpp.i
+
+CMakeFiles/command_test.dir/fisher.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/command_test.dir/fisher.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/norbert/workspace/off-target-effects_Seqan/Coding/github/fisher.cpp -o CMakeFiles/command_test.dir/fisher.cpp.s
+
+CMakeFiles/command_test.dir/fisher.cpp.o.requires:
+.PHONY : CMakeFiles/command_test.dir/fisher.cpp.o.requires
+
+CMakeFiles/command_test.dir/fisher.cpp.o.provides: CMakeFiles/command_test.dir/fisher.cpp.o.requires
+	$(MAKE) -f CMakeFiles/command_test.dir/build.make CMakeFiles/command_test.dir/fisher.cpp.o.provides.build
+.PHONY : CMakeFiles/command_test.dir/fisher.cpp.o.provides
+
+CMakeFiles/command_test.dir/fisher.cpp.o.provides.build: CMakeFiles/command_test.dir/fisher.cpp.o
+
 # Object files for target command_test
 command_test_OBJECTS = \
 "CMakeFiles/command_test.dir/command_test.cpp.o" \
 "CMakeFiles/command_test.dir/parse.cpp.o" \
 "CMakeFiles/command_test.dir/inputTransc.cpp.o" \
 "CMakeFiles/command_test.dir/kmers.cpp.o" \
-"CMakeFiles/command_test.dir/countFinds.cpp.o"
+"CMakeFiles/command_test.dir/countFinds.cpp.o" \
+"CMakeFiles/command_test.dir/fisher.cpp.o"
 
 # External object files for target command_test
 command_test_EXTERNAL_OBJECTS =
@@ -180,6 +204,7 @@ command_test: CMakeFiles/command_test.dir/parse.cpp.o
 command_test: CMakeFiles/command_test.dir/inputTransc.cpp.o
 command_test: CMakeFiles/command_test.dir/kmers.cpp.o
 command_test: CMakeFiles/command_test.dir/countFinds.cpp.o
+command_test: CMakeFiles/command_test.dir/fisher.cpp.o
 command_test: CMakeFiles/command_test.dir/build.make
 command_test: /usr/lib/x86_64-linux-gnu/libz.so
 command_test: CMakeFiles/command_test.dir/link.txt
@@ -195,6 +220,7 @@ CMakeFiles/command_test.dir/requires: CMakeFiles/command_test.dir/parse.cpp.o.re
 CMakeFiles/command_test.dir/requires: CMakeFiles/command_test.dir/inputTransc.cpp.o.requires
 CMakeFiles/command_test.dir/requires: CMakeFiles/command_test.dir/kmers.cpp.o.requires
 CMakeFiles/command_test.dir/requires: CMakeFiles/command_test.dir/countFinds.cpp.o.requires
+CMakeFiles/command_test.dir/requires: CMakeFiles/command_test.dir/fisher.cpp.o.requires
 .PHONY : CMakeFiles/command_test.dir/requires
 
 CMakeFiles/command_test.dir/clean:

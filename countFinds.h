@@ -14,17 +14,17 @@ struct Contingency
     //Sequence of the kmer
     seqan::DnaString kmerSeq;
     //number of regulated mRNAs, in which the kmer is contained
-    int kmerDN;
+    unsigned kmerDN;
     //numbers in transcriptome of the regulated mRNAs that contain the kmer
     std::vector<unsigned> idDN;
     //number of not regulated mRNAs, in which the kmer is contained
-    int kmerNoDN;
+    unsigned kmerNoDN;
     //number in the transcriptome structure of the not regulated mRNAs that contain the kmer
     std::vector<unsigned> idNoDN;
     //number of regulated mRNAs, that do not contain the kmer
-    int noKmerDN;
+    unsigned noKmerDN;
     //number of not regulated mRNAs, that do not contain the kmer
-    int noKmerNoDN;
+    unsigned noKmerNoDN;
 };
 //pattern matching of kmers and mRNAs--> count #hits in affected and unaffected genes
 void countFinds (std::vector<Contingency> & allContigs, seqan::StringSet<seqan::DnaString> kmers, Transcriptome transcripts);

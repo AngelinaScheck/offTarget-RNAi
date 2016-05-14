@@ -14,7 +14,7 @@
 #include "inputTransc.h"
 #include "kmers.h"
 #include "countFinds.h"
-
+#include "fisher.h"
 
 
 
@@ -57,13 +57,19 @@ int main(int argc, char const ** argv)
     //read transcriptome data from table
     Transcriptome transcripts;
     getTransc (options, transcripts);
+    //number of mRNAs in total
+    unsigned nMRNAs;
+    nMRNAs=length(transcripts.mRNAset);
     
     //mRNA affected by RNAi
     Transcriptome regulated;
     //mRNA not affected by RNAi
     Transcriptome notRegulated;
     //decide, if mRNA is up-/downregulated or not affected bei RNAi according to cutoff;
-    sortMRNA (transcripts, regulated, notRegulated);;
+    sortMRNA (transcripts, regulated, notRegulated);
+    //number of downregulated mRNAs
+    unsigned nReg;
+    nReg= length(regulated.mRNAset);
     
     //generate kmers
     seqan::StringSet<seqan::DnaString> kmers;
@@ -78,6 +84,10 @@ int main(int argc, char const ** argv)
     countFinds (contingencies, kmers, transcripts);
     //fill empty fields of contingency tables
     fillFields (contingencies, regulated, notRegulated);
+    
+    //decide if enrichment of kmers in downregulated mRNA is significant, create results
+    Results results;
+    significant(contingencies, 0.05, nReg, nMRNAs, results, transcripts);
 
 
     return 0;

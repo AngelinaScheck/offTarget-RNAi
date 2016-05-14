@@ -33,6 +33,8 @@ kmers.h
 /home/norbert/workspace/off-target-effects_Seqan/Coding/github/kmers.h
 countFinds.h
 /home/norbert/workspace/off-target-effects_Seqan/Coding/github/countFinds.h
+fisher.h
+/home/norbert/workspace/off-target-effects_Seqan/Coding/github/fisher.h
 
 /home/norbert/workspace/off-target-effects_Seqan/Coding/github/countFinds.cpp
 iostream
@@ -81,6 +83,32 @@ seqan/stream.h
 -
 parse.h
 /home/norbert/workspace/off-target-effects_Seqan/Coding/github/parse.h
+
+/home/norbert/workspace/off-target-effects_Seqan/Coding/github/fisher.cpp
+iostream
+-
+vector
+-
+boost/math/distributions/hypergeometric.hpp
+-
+inputTransc.h
+/home/norbert/workspace/off-target-effects_Seqan/Coding/github/inputTransc.h
+countFinds.h
+/home/norbert/workspace/off-target-effects_Seqan/Coding/github/countFinds.h
+fisher.h
+/home/norbert/workspace/off-target-effects_Seqan/Coding/github/fisher.h
+
+/home/norbert/workspace/off-target-effects_Seqan/Coding/github/fisher.h
+iostream
+-
+vector
+-
+boost/math/distributions/hypergeometric.hpp
+-
+inputTransc.h
+/home/norbert/workspace/off-target-effects_Seqan/Coding/github/inputTransc.h
+countFinds.h
+/home/norbert/workspace/off-target-effects_Seqan/Coding/github/countFinds.h
 
 /home/norbert/workspace/off-target-effects_Seqan/Coding/github/inputTransc.cpp
 fstream

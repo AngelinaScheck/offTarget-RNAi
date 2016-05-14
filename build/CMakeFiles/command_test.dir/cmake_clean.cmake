@@ -4,6 +4,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/command_test.dir/inputTransc.cpp.o"
   "CMakeFiles/command_test.dir/kmers.cpp.o"
   "CMakeFiles/command_test.dir/countFinds.cpp.o"
+  "CMakeFiles/command_test.dir/fisher.cpp.o"
   "command_test.pdb"
   "command_test"
 )

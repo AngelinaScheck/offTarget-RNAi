@@ -162,6 +162,30 @@ countFinds.cpp.s:
 	$(MAKE) -f CMakeFiles/command_test.dir/build.make CMakeFiles/command_test.dir/countFinds.cpp.s
 .PHONY : countFinds.cpp.s
 
+fisher.o: fisher.cpp.o
+.PHONY : fisher.o
+
+# target to build an object file
+fisher.cpp.o:
+	$(MAKE) -f CMakeFiles/command_test.dir/build.make CMakeFiles/command_test.dir/fisher.cpp.o
+.PHONY : fisher.cpp.o
+
+fisher.i: fisher.cpp.i
+.PHONY : fisher.i
+
+# target to preprocess a source file
+fisher.cpp.i:
+	$(MAKE) -f CMakeFiles/command_test.dir/build.make CMakeFiles/command_test.dir/fisher.cpp.i
+.PHONY : fisher.cpp.i
+
+fisher.s: fisher.cpp.s
+.PHONY : fisher.s
+
+# target to generate assembly for a file
+fisher.cpp.s:
+	$(MAKE) -f CMakeFiles/command_test.dir/build.make CMakeFiles/command_test.dir/fisher.cpp.s
+.PHONY : fisher.cpp.s
+
 inputTransc.o: inputTransc.cpp.o
 .PHONY : inputTransc.o
 
@@ -249,6 +273,9 @@ help:
 	@echo "... countFinds.o"
 	@echo "... countFinds.i"
 	@echo "... countFinds.s"
+	@echo "... fisher.o"
+	@echo "... fisher.i"
+	@echo "... fisher.s"
 	@echo "... inputTransc.o"
 	@echo "... inputTransc.i"
 	@echo "... inputTransc.s"
