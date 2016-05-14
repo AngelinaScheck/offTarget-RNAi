@@ -1,1 +1,1 @@
-# offTarget-iRNA
+# offTarget-RNAi
