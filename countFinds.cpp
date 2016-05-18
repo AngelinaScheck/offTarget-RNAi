@@ -65,7 +65,6 @@ void initializeCont (seqan::StringSet<seqan::DnaString> kmers, Contingency & all
         allContigs.idNoDN.push_back(mock);
         allContigs.idDN.push_back(mock);
     }
-    std::cout << "initial intialization"<< '\n';
     //assign the kmer to the position in the Contingencies Table
     for (unsigned j=0; j<l; j++){
         if (length(getValue(allContigs.kmerSeq, kmerToID(getValue(kmers, j))))>0){
@@ -89,8 +88,9 @@ void  countFinds (Contingency & allContigs, seqan::StringSet<seqan::DnaString> k
     // Search for the kmers database sequence by database sequence.
     //search kmers in down-/upregulated genes
     unsigned id;
+    std::cout <<"processing mRNAs"<<'\n';
     for (unsigned i = 0; i < length(transcripts.mRNAset); i++){
-        std::cout <<"processing mRNA number"<<'\t'<< i<<'\n';
+        //std::cout <<"processing mRNA number"<<'\t'<< i<<'\n';
         seqan::Finder<seqan::DnaString> finder(transcripts.mRNAset[i]);  // new finder for each seq
         while(find(finder, pattern)){
             

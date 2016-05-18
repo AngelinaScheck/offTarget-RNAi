@@ -21,6 +21,7 @@ void significant(Contingency & allContigs, double alpha, unsigned nReg, unsigned
     results.noKmerDN.reserve(s);
     results.noKmerNoDN.reserve(s);
     results.pValue.reserve(s);
+    results.qValue.reserve(s);
     results.mRNAIDs.reserve(s);
     //perform fisher's test on every Contingency Table
     for (unsigned i=0; i<s; i++){
@@ -50,9 +51,117 @@ void significant(Contingency & allContigs, double alpha, unsigned nReg, unsigned
                 results.noKmerDN.push_back(allContigs.noKmerDN[i]);
                 results.noKmerNoDN.push_back(allContigs.noKmerNoDN[i]);
                 results.pValue.push_back(pvalue);
+                results.qValue.push_back(pvalue);
                 results.mRNAIDs.push_back(mRNAIDs);
                 mRNAIDs.clear();
             }
+        }
+    }
+}
+
+//______________________________________________________________________________________________________________________________________________________________
+
+void benjHoch (Results & results, double alpha){
+ 
+    //sort results by p-value (quicksort)
+    quickSort(results, 0, results.kmerDN.size()-1);
+    //according to Benjamin Hochber all kmers with qValue=alpha*rank(pValue)/#entries<= pVale are significant
+    
+    //calculate qValue for kmers, delete if qValue>pValue
+    unsigned nEntries = results.kmerDN.size();
+    for(unsigned i=0; i<results.kmerDN.size(); i++){
+        results.qValue[i] = alpha * (i+1) / nEntries;
+        if (results.qValue[i] > results.pValue[i]) {
+            erase(results.signfKmers, i);
+            results.kmerDN.erase(results.kmerDN.begin() + i);
+            results.kmerNoDN.erase(results.kmerNoDN.begin() + i);
+            results.noKmerDN.erase (results.noKmerDN.begin() + i);
+            results.noKmerNoDN.erase (results.noKmerNoDN.begin() + i);
+            results.pValue.erase (results.pValue.begin() + i);
+            results.qValue.erase (results.qValue.begin() + i);
+            results.mRNAIDs.erase (results.mRNAIDs.begin() + i);
+        }
+    }
+    
+}
+
+//______________________________________________________________________________________________________________________________________________________________
+
+void quickSort(Results & results, unsigned left, unsigned right){
+    //intialize counter for left and right sublists
+    unsigned i = left; 
+    unsigned j = right;
+    //initialize pivot element (middle)
+    unsigned mid= left + (right - left) / 2;
+    double pivot = results.pValue[mid];
+    //temporary values
+    seqan::DnaString tempSignfKmer;
+    int tempKmerDN;
+    int tempKmerNoDN;
+    int tempNoKmerDN;
+    int tempNoKmerNoDN;
+    double tempPValue;
+    double tempQValue;
+    std::string tempMRNAID;
+    
+    //divide and conq.
+    while (i<=j) {
+        while (results.pValue[i] <= pivot){
+            //all elements in left sublist smaller/equal than the pivot element remain untouched
+            if (i>=j){
+                break;
+            }
+            i++;
+        }
+        while (results.pValue[j] > pivot){
+            //all elements in right sublist bigger than the pivot remain untouched  
+            if (j<=i){
+                break;
+            }
+            j--;
+        }
+        //if an element in the left sublist bigger pivot or an element in the right sublist smaller/equal the pivot element was find, swap the entries
+        if (i <= j) {
+            //assign the temporary variables
+            tempSignfKmer=getValue(results.signfKmers, i);
+            tempKmerDN= results.kmerDN[i];
+            tempKmerNoDN = results.kmerNoDN[i];
+            tempNoKmerDN = results.noKmerDN[i];
+            tempNoKmerNoDN = results.noKmerNoDN[i];
+            tempPValue = results.pValue[i];
+            tempQValue = results.qValue[i];
+            tempMRNAID = results.mRNAIDs[i];
+            
+            //swap
+            assignValue(results.signfKmers, i, getValue(results.signfKmers, j));
+            results.kmerDN[i] = results.kmerDN[j];
+            results.kmerNoDN[i] = results.kmerNoDN[j];
+            results.noKmerDN[i] = results.noKmerDN[j];
+            results.noKmerNoDN[i] = results.noKmerNoDN[j];
+            results.pValue[i] = results.pValue[j];
+            results.qValue[i] = results.qValue[j];
+            results.mRNAIDs[i] = results.mRNAIDs[j];
+            
+            assignValue(results.signfKmers, j, tempSignfKmer);
+            results.kmerDN[j] = tempKmerDN;
+            results.kmerNoDN[j] = tempKmerNoDN;
+            results.noKmerDN[j] = tempNoKmerDN;
+            results.noKmerNoDN[j] = tempNoKmerNoDN;
+            results.pValue[j] = tempPValue;
+            results.qValue[j] = tempQValue;
+            results.mRNAIDs[j] = tempMRNAID;
+            
+            //continue
+            i++;
+            j--;
+            }
+    
+        //if sublist already sorted got one level deeper    
+        if(left<j){
+            quickSort(results, left, j);
+        }
+        if(i<right){
+            quickSort(results,i,right);
         }
     }
 }

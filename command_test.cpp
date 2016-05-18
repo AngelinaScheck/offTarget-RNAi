@@ -87,10 +87,15 @@ int main(int argc, char const ** argv)
     //decide if enrichment of kmers in downregulated mRNA is significant, create results
     Results results;
     significant(contingencies, 0.01, nReg, nMRNAs, results, transcripts);
+    //multiple testing correction (Benjamin Hochberg)
+    std::cout <<length(results.signfKmers)<<'\t' << "suspicous kmers before multiple testing correction" << '\n';
+    benjHoch (results, 0.01);
+    
     //print results to command line
-    std::cout <<length(results.signfKmers)<<'\t' << "suspicous kmers" << '\n';
+    std::cout <<length(results.signfKmers)<<'\t' << "suspicous kmers after multiple testing correction" << '\n';
+    std::cout << "kmer" << '\t' << "p-Value" <<'\t' << "q-Value" <<'\t'<< "found in mRNA" << '\n';
     for (unsigned i=0; i<results.kmerDN.size(); i++){
-        std::cout << getValue(results.signfKmers, i) << '\t' << results.pValue[i] <<'\t'<< results.mRNAIDs[i] << '\n';
+        std::cout << getValue(results.signfKmers, i) << '\t' << results.pValue[i] << '\t' << results.qValue[i] <<'\t'<< results.mRNAIDs[i] << '\n';
     }
 
 
