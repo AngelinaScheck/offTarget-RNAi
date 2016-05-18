@@ -19,7 +19,7 @@ struct Results{
 };
 
 //calculates probability of the contingency table, its p-value and sorts entry according to level of significance
-void significant(std::vector<Contingency> & allContigs, double alpha, unsigned nReg, unsigned nMRNAs, Results & results, Transcriptome & transcripts);
+void significant(Contingency & allContigs, double alpha, unsigned nReg, unsigned nMRNAs, Results & results, Transcriptome & transcripts);
 
 
 #endif

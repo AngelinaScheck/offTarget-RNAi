@@ -77,17 +77,21 @@ int main(int argc, char const ** argv)
     
     //find kmers
     //initialization of Contingency Table
-    std::vector<Contingency> contingencies;
-    contingencies.reserve(length(kmers));
+    Contingency contingencies;
+    //contingencies.reserve(length(kmers));
     initializeCont(kmers, contingencies);
     //fill counters
     countFinds (contingencies, kmers, transcripts);
     //fill empty fields of contingency tables
     fillFields (contingencies, regulated, notRegulated);
-    
     //decide if enrichment of kmers in downregulated mRNA is significant, create results
     Results results;
-    significant(contingencies, 0.05, nReg, nMRNAs, results, transcripts);
+    significant(contingencies, 0.01, nReg, nMRNAs, results, transcripts);
+    //print results to command line
+    std::cout <<length(results.signfKmers)<<'\t' << "suspicous kmers" << '\n';
+    for (unsigned i=0; i<results.kmerDN.size(); i++){
+        std::cout << getValue(results.signfKmers, i) << '\t' << results.pValue[i] <<'\t'<< results.mRNAIDs[i] << '\n';
+    }
 
 
     return 0;
