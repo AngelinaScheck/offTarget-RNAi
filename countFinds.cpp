@@ -4,10 +4,13 @@
 
 #include <seqan/sequence.h>
 #include <seqan/find.h>
+#include <seqan/index.h> 
 
 #include "countFinds.h"
 #include "inputTransc.h"
 #include <math.h>
+
+
 
 //translate kmer to a number to later hash the kmer in pattern matching
 unsigned kmerToID(seqan::DnaString kmer){
@@ -36,6 +39,66 @@ unsigned kmerToID(seqan::DnaString kmer){
     
     return position;
 }
+
+
+
+
+//_______________________________________Counting with indexed pattern matching________________________________________________
+void countFindsIndex (Contingency & allContigs, seqan::StringSet<seqan::DnaString> kmers, Transcriptome transcripts){
+    
+    //initialize finders
+    seqan::Index<seqan::StringSet<seqan::DnaString>> index(transcripts.mRNAset);
+    seqan::Finder<seqan::Index<seqan::StringSet<seqan::DnaString>> > finder(transcripts.mRNAset);
+    //kmer temporary saved in pattern
+    seqan::DnaString pattern;
+    
+    for (unsigned kN=0; kN < length(kmers); kN++){
+        pattern=getValue(kmers, kN);
+        std::cout << "pattern matching in progress" << '\n';
+        while(find(finder, pattern)){
+            //assign the hit to the correct kmer sequence by converting the pattern sequence into an ID
+            
+            //IMPROVE HERE!!!!!!!!!!!!!!!!!!!!!!!
+            // unsigned id= kmerToID(pattern);
+//             if(transcripts.isReg[i]){
+//                 allContigs.idDN[id].push_back(i);
+//             }
+//             else {
+//                 allContigs.idNoDN[id].push_back(i);
+//             }
+        }
+    }
+}
+
+//__________________________________________Counting with qgram Indexing_________________________________________________________
+template <typename TStringSet, typename TIndexSpec>
+void qgramCounting(seqan::StringSet<seqan::DnaString> & kmers, Transcriptome & transcripts, Contingency & allContigs )
+{
+     typedef seqan::Index<TStringSet, TIndexSpec> TIndex;
+//     typedef typename Fibre<TIndex, QGramCounts>::Type TCounts;
+//     typedef typename Fibre<TIndex, QGramCountsDir>::Type TCountsDir;
+//     typedef typename Value<TCountsDir>::Type TDirValue;
+//     typedef typename Iterator<TCounts, Standard>::Type TIterCounts;
+//     typedef typename Iterator<TCountsDir, Standard>::Type TIterCountsDir;
+    
+    //indexing over mRNA sequences
+    TIndex index(transcripts.mRNAset);
+    
+    //shape
+    seqan::Shape<seqan::Dna, seqan::UngappedShape<6> > kmerShape;
+        
+//     //fiber iterator
+//     TIterCountsDir itCountsDir = begin(indexCountsDir(index), Standard());
+//     TIterCountsDir itCountsDirEnd = end(indexCountsDir(index), Standard());
+//     TIterCounts itCountsBegin = begin(indexCounts(index), Standard());
+    
+    //hash over kmers
+    for(unsigned kN=0; kN<length(kmers); kN++){
+        assignValue(allContigs.kmerSeq, getValue(kmers, kN));
+        countOccurrencesMultiple(index, kmerShape);
+    }
+}
+//__________________________________________Counting with online pattern matching_________________________________________________
 
 //initialize List of contingency tables (one for every kmer)
 void initializeCont (seqan::StringSet<seqan::DnaString> kmers, Contingency & allContigs){

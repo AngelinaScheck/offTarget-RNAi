@@ -80,6 +80,12 @@ int main(int argc, char const ** argv)
     Contingency contingencies;
     //contingencies.reserve(length(kmers));
     initializeCont(kmers, contingencies);
+    
+    //indexed pattern matching
+    //countFindsIndex (contingencies, kmers,transcripts);
+    //try qgram
+    //qgramCounting(kmers, transcripts, contingencies);
+    
     //fill counters
     countFinds (contingencies, kmers, transcripts);
     //fill empty fields of contingency tables

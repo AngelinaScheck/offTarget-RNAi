@@ -26,6 +26,14 @@ struct Contingency
     //number of not regulated mRNAs, that do not contain the kmer
     std::vector<unsigned> noKmerNoDN;
 };
+
+//qgram
+void qgramCounting(seqan::StringSet<seqan::DnaString> & kmers, Transcriptome & transcripts, Contingency & allContigs );
+
+//indexed pattern matching
+void countFindsIndex (Contingency & allContigs, seqan::StringSet<seqan::DnaString> kmers, Transcriptome transcripts);
+
+//__________________________________________________________________________________________
 //pattern matching of kmers and mRNAs--> count #hits in affected and unaffected genes
 void countFinds (Contingency & allContigs, seqan::StringSet<seqan::DnaString> kmers, Transcriptome transcripts);
 
