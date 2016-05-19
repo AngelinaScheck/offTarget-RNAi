@@ -47,14 +47,15 @@ unsigned kmerToID(seqan::DnaString kmer){
 void countFindsIndex (Contingency & allContigs, seqan::StringSet<seqan::DnaString> kmers, Transcriptome transcripts){
     
     //initialize finders
-    seqan::Index<seqan::StringSet<seqan::DnaString>> index(transcripts.mRNAset);
+    seqan::Index<seqan::StringSet<seqan::DnaString>, seqan::IndexQGram<seqan::UngappedShape<6>, seqan::OpenAddressing>> index(transcripts.mRNAset);
     seqan::Finder<seqan::Index<seqan::StringSet<seqan::DnaString>> > finder(transcripts.mRNAset);
     //kmer temporary saved in pattern
     seqan::DnaString pattern;
     
     for (unsigned kN=0; kN < length(kmers); kN++){
+        clear(finder);
         pattern=getValue(kmers, kN);
-        std::cout << "pattern matching in progress" << '\n';
+        std::cout << "pattern matching kmer" <<'\t'<<kN << '\n';
         while(find(finder, pattern)){
             //assign the hit to the correct kmer sequence by converting the pattern sequence into an ID
             
