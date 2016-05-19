@@ -6,15 +6,18 @@
 
 struct ModifyStringOptions
 {
-
-    std::string transcriptome;
+    //Input
+    //name of preprocessed mRNA-expression level table
+    std::string preprocessed;
+    //names of unprocessed expression level list and unprocessed mRNA list
+    std::string expression;
+    std::string sequences;
+    //cutoff for expression table
     double cutoff;
+    //length of the kmers
     int k;
-    
-//     //Expression Data File
-//     std::string expression;
-//     //mRNA Sequences File
-//     std::string sequences;
+    //significance level alpha
+    double signf;
 };
 
 seqan::ArgumentParser::ParseResult

@@ -43,5 +43,8 @@ void initializeCont (seqan::StringSet<seqan::DnaString> kmers, Contingency & all
 //calculate #no hits in affected and unaffected genes from results of countFinds
 void fillFields (Contingency & allContigs, Transcriptome regulated, Transcriptome notRegulated);
 
+//translate kmer sequence to an id
+unsigned kmerToID(seqan::DnaString kmer);
+
 
 #endif

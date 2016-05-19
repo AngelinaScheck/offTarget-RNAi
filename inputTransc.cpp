@@ -17,7 +17,7 @@ void getTransc (ModifyStringOptions & options, Transcriptome & transcripts){
     
     //build and check stream
     std::ifstream inTransc;
-    inTransc.open(options.transcriptome);
+    inTransc.open(options.preprocessed);
     if (! inTransc) {
         std::cerr << "unable to open transcriptome table" << '\n';
         return;
@@ -41,20 +41,92 @@ void getTransc (ModifyStringOptions & options, Transcriptome & transcripts){
             transcripts.genes.push_back(gene);
             transcripts.values.push_back(value);
             appendValue(transcripts.mRNAset, mRNA);
-            if(value< options.cutoff){
-                transcripts.isReg.push_back(false);
-            }
-            else{
-                transcripts.isReg.push_back(true);
-            }
+            transcripts.isReg.push_back(false);
         }
     }
     inTransc.close();
 }
+//___________________________________________________________________________________________________
+//sorts transcriptome data according to expression level using the quicksort algorithm (see also quickSort in fisher.cpp)
+void sortTransc (Transcriptome & transcripts, unsigned left, unsigned right){
+   
+// Reminder Transcriptome Data Structure
+//     std::vector<std::string> ids;
+//     std::vector<std::string> genes;
+//     std::vector<float> values;
+//     seqan::StringSet<seqan::DnaString> mRNAset;
+//     std::vector<bool> isReg;
+    
+    
+ //intialize counter for left and right sublists
+    unsigned i = left; 
+    unsigned j = right;
+    //initialize pivot element (middle)
+    unsigned mid= left + (right - left) / 2;
+    double pivot = transcripts.values[mid];
+    //temporary values
+    std::string tempId;
+    std::string tempGene;
+    float tempValue;
+    seqan::DnaString tempMRNA;
+    bool tempIsReg;
+    //divide and conq.
+    while (i<=j) {
+        while (transcripts.values[i] <= pivot){
+            //all elements in left sublist smaller/equal than the pivot element remain untouched
+            if (i>=j){
+                break;
+            }
+            i++;
+        }
+        while (transcripts.values[j] > pivot){
+            //all elements in right sublist bigger than the pivot remain untouched  
+            if (j<=i){
+                break;
+            }
+            j--;
+        }
+        //if an element in the left sublist bigger pivot or an element in the right sublist smaller/equal the pivot element was find, swap the entries
+        if (i <= j) {
+            //assign the temporary variables
+            tempId = transcripts.ids[i];
+            tempGene = transcripts.genes[i];
+            tempValue = transcripts.values[i];
+            tempMRNA = getValue(transcripts.mRNAset, i);
+            tempIsReg = transcripts.isReg[i];
+            
+            //swap
+            transcripts.ids[i] = transcripts.ids[j];
+            transcripts.genes[i] = transcripts.genes[j];
+            transcripts.values[i] = transcripts.values[j];
+            assignValue(transcripts.mRNAset, i, getValue(transcripts.mRNAset, j));
+            transcripts.isReg[i] = transcripts.isReg[j];
+            
+            transcripts.ids[j] = tempId;
+            transcripts.genes[j] = tempGene;
+            transcripts.values[j] = tempValue;
+            assignValue(transcripts.mRNAset, j, tempMRNA);
+            transcripts.isReg[j] = tempIsReg;
+            
+            //continue
+            i++;
+            j--;
+            }
+    
+        //if sublist already sorted got one level deeper    
+        if(left<j){
+            sortTransc(transcripts, left, j);
+        }
+        if(i<right){
+            sortTransc(transcripts,i,right);
+        }
+    }   
+    
+}
 
-
+//____________________________________________________________________________________________________
 // split whole transcriptome: if mRNA expression meets cutoff -->regulated, else notRegulated
-void sortMRNA (Transcriptome & transcripts, Transcriptome & regulated, Transcriptome & notRegulated){
+void sortMRNA (ModifyStringOptions & options, Transcriptome & transcripts, Transcriptome & regulated, Transcriptome & notRegulated){
     //clear
     regulated.ids.clear();
     regulated.values.clear();
@@ -66,9 +138,14 @@ void sortMRNA (Transcriptome & transcripts, Transcriptome & regulated, Transcrip
     notRegulated.genes.clear();
     clear(notRegulated.mRNAset);
     
+    //sort transcripts by expression level, rank= place in vector +1
+    sortTransc (transcripts, 0 , transcripts.ids.size()-1);
+    
+    unsigned absCutoff = options.cutoff * transcripts.ids.size();
     //sort according to bool value in transcripts which was set according to cutoff
     for (int i=0; i<transcripts.ids.size(); i++){
-        if(transcripts.isReg[i]){
+        if((i+1)<= absCutoff){
+            transcripts.isReg[i]=true;
             regulated.ids.push_back(transcripts.ids[i]);
             regulated.genes.push_back(transcripts.genes[i]);
             regulated.values.push_back(transcripts.values[i]);

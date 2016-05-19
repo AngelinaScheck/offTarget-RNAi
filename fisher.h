@@ -24,10 +24,10 @@ struct Results{
 };
 
 //calculates probability of the contingency table, its p-value and sorts entry according to level of significance
-void significant(Contingency & allContigs, double alpha, unsigned nReg, unsigned nMRNAs, Results & results, Transcriptome & transcripts);
+void significant(Contingency & allContigs, ModifyStringOptions & options, unsigned nReg, unsigned nMRNAs, Results & results, Transcriptome & transcripts);
 
 //multiple testing correction
-void benjHoch (Results & results, double alpha);
+void benjHoch (Results & results, ModifyStringOptions & options);
 
 //quicksort for Results Datastructure
 void quickSort(Results & results, unsigned left, unsigned right);

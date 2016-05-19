@@ -57,6 +57,9 @@ int main(int argc, char const ** argv)
     //read transcriptome data from table
     Transcriptome transcripts;
     getTransc (options, transcripts);
+    if(transcripts.ids.size()==0){
+        return 1;
+    }
     //number of mRNAs in total
     unsigned nMRNAs;
     nMRNAs=length(transcripts.mRNAset);
@@ -66,7 +69,8 @@ int main(int argc, char const ** argv)
     //mRNA not affected by RNAi
     Transcriptome notRegulated;
     //decide, if mRNA is up-/downregulated or not affected bei RNAi according to cutoff;
-    sortMRNA (transcripts, regulated, notRegulated);
+    
+    sortMRNA (options, transcripts, regulated, notRegulated);
     //number of downregulated mRNAs
     unsigned nReg;
     nReg= length(regulated.mRNAset);
@@ -92,16 +96,19 @@ int main(int argc, char const ** argv)
     fillFields (contingencies, regulated, notRegulated);
     //decide if enrichment of kmers in downregulated mRNA is significant, create results
     Results results;
-    significant(contingencies, 0.01, nReg, nMRNAs, results, transcripts);
+    significant(contingencies, options, nReg, nMRNAs, results, transcripts);
     //multiple testing correction (Benjamin Hochberg)
     std::cout <<length(results.signfKmers)<<'\t' << "suspicous kmers before multiple testing correction" << '\n';
-    benjHoch (results, 0.01);
+    benjHoch (results, options);
     
     //print results to command line
     std::cout <<length(results.signfKmers)<<'\t' << "suspicous kmers after multiple testing correction" << '\n';
-    std::cout << "kmer" << '\t' << "p-Value" <<'\t' << "q-Value" <<'\t'<< "found in mRNA" << '\n';
+//     std::cout << "kmer" << '\t' << "p-Value" <<'\t' << "q-Value" <<'\t'<< "found in mRNA" << '\n';
     for (unsigned i=0; i<results.kmerDN.size(); i++){
-        std::cout << getValue(results.signfKmers, i) << '\t' << results.pValue[i] << '\t' << results.qValue[i] <<'\t'<< results.mRNAIDs[i] << '\n';
+        if(getValue(results.signfKmers, i)=="CUGCUGA"){
+        std::cout << i << '\n' /*<< results.pValue[i] << '\t' << results.qValue[i] <<'\t'<< results.mRNAIDs[i] << '\n'*/;
+        }
+            
     }
 
 

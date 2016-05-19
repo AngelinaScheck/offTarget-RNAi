@@ -7,9 +7,10 @@
 #include "fisher.h"
 
 //check also documentation on boost.org on Fishers test
-void significant(Contingency & allContigs, double alpha, unsigned nReg, unsigned nMRNAs, Results & results, Transcriptome & transcripts){
+void significant(Contingency & allContigs, ModifyStringOptions & options, unsigned nReg, unsigned nMRNAs, Results & results, Transcriptome & transcripts){
     std::string mRNAIDs;
     double pvalue;
+    double alpha = options.signf;
     //how often was the kmer found?
     unsigned kmerIn;
     //Contingency Table Size
@@ -61,8 +62,9 @@ void significant(Contingency & allContigs, double alpha, unsigned nReg, unsigned
 
 //______________________________________________________________________________________________________________________________________________________________
 
-void benjHoch (Results & results, double alpha){
- 
+void benjHoch (Results & results, ModifyStringOptions & options){
+    //signficance level
+    double alpha = options.signf;
     //sort results by p-value (quicksort)
     quickSort(results, 0, results.kmerDN.size()-1);
     //according to Benjamin Hochber all kmers with qValue=alpha*rank(pValue)/#entries<= pVale are significant

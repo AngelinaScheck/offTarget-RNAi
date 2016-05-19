@@ -25,6 +25,9 @@ struct Transcriptome
 
 void getTransc (ModifyStringOptions & options, Transcriptome & transcripts);
 
-void sortMRNA (Transcriptome & transcripts, Transcriptome & regulated, Transcriptome & notRegulated);
+//ranks mRNAs according to score
+void sortTransc (Transcriptome & transcripts, unsigned left, unsigned right);
+
+void sortMRNA (ModifyStringOptions & options, Transcriptome & transcripts, Transcriptome & regulated, Transcriptome & notRegulated);
 
 #endif
