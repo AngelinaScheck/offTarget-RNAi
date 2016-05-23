@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <sys/time.h>
 
 #include <seqan/sequence.h>
 #include <seqan/find.h>
@@ -71,35 +72,6 @@ void countFindsIndex (Contingency & allContigs, seqan::StringSet<seqan::DnaStrin
     }
 }
 
-//__________________________________________Counting with qgram Indexing_________________________________________________________
-template <typename TStringSet, typename TIndexSpec>
-void qgramCounting(seqan::StringSet<seqan::DnaString> & kmers, Transcriptome & transcripts, Contingency & allContigs )
-{
-     typedef seqan::Index<TStringSet, TIndexSpec> TIndex;
-//     typedef typename Fibre<TIndex, QGramCounts>::Type TCounts;
-//     typedef typename Fibre<TIndex, QGramCountsDir>::Type TCountsDir;
-//     typedef typename Value<TCountsDir>::Type TDirValue;
-//     typedef typename Iterator<TCounts, Standard>::Type TIterCounts;
-//     typedef typename Iterator<TCountsDir, Standard>::Type TIterCountsDir;
-    
-    //indexing over mRNA sequences
-    TIndex index(transcripts.mRNAset);
-    
-    //shape
-    seqan::Shape<seqan::Dna, seqan::UngappedShape<6> > kmerShape;
-        
-//     //fiber iterator
-//     TIterCountsDir itCountsDir = begin(indexCountsDir(index), Standard());
-//     TIterCountsDir itCountsDirEnd = end(indexCountsDir(index), Standard());
-//     TIterCounts itCountsBegin = begin(indexCounts(index), Standard());
-    
-    //hash over kmers
-    for(unsigned kN=0; kN<length(kmers); kN++){
-        assignValue(allContigs.kmerSeq, getValue(kmers, kN));
-        countOccurrencesMultiple(index, kmerShape);
-    }
-}
-//__________________________________________Counting with online pattern matching_________________________________________________
 
 //initialize List of contingency tables (one for every kmer)
 void initializeCont (seqan::StringSet<seqan::DnaString> kmers, Contingency & allContigs){
@@ -142,9 +114,11 @@ void initializeCont (seqan::StringSet<seqan::DnaString> kmers, Contingency & all
 
 //______________________________________________________________________________________________________________________________________________
 
-//A new contingency table is created for each occucance of each kmer, later the contingency tables for same kmer are combined
+//fills contingency tables with online pattern matching and kmerToID- method (see above)
 void  countFinds (Contingency & allContigs, seqan::StringSet<seqan::DnaString> kmers, Transcriptome transcripts){
-    
+    timeval online;
+    gettimeofday(&online, NULL);
+    double startOnline= (online.tv_sec *1000000) + online.tv_usec;
     // Database are the mRNAs from Transcriptome;
     
     // Define the Aho-Corasick pattern over the kmers
@@ -169,6 +143,9 @@ void  countFinds (Contingency & allContigs, seqan::StringSet<seqan::DnaString> k
             }
         }
     }
+    gettimeofday(&online, NULL);
+    double endOnline= (online.tv_sec *1000000) + online.tv_usec;
+    std::cout << length(kmers) << " kmers checked in " << (endOnline-startOnline)/1000000  << " seconds with Aho-Corasick pattern matching" << '\n';
 }
 
 //_________________________________________________________________________________________________________________________________________
@@ -182,12 +159,14 @@ void fillFields (Contingency & allContigs, Transcriptome regulated, Transcriptom
     //std::vector<int>::iterator it;
     for(unsigned i=0; i<allContigs.kmerDN.size(); i++){
         //correct counters, for multiple hits in one mRNA (list is sorted--> we can use std::unique)
-        //for affected mRNAs that contain the kmer
+        //for affected mRNAs that contain the kmer (sort, iterator for duplicates, delete duplicates)
+        std::sort(allContigs.idDN[i].begin(), allContigs.idDN[i].end());
         auto it = std::unique (allContigs.idDN[i].begin(), allContigs.idDN[i].end());
         allContigs.idDN[i].resize( std::distance(allContigs.idDN[i].begin(), it));
         //-1 because of the mock place holder at initialization of idDN
         allContigs.kmerDN[i]=allContigs.idDN[i].size()-1;
         //for unaffected mRNAs that contain the kmer
+        std::sort(allContigs.idNoDN[i].begin(), allContigs.idNoDN[i].end());
         auto it2 = std::unique (allContigs.idNoDN[i].begin(), allContigs.idNoDN[i].end());
         allContigs.idNoDN[i].resize( std::distance(allContigs.idNoDN[i].begin(),it2));
         allContigs.kmerNoDN[i]=allContigs.idNoDN[i].size()-1;

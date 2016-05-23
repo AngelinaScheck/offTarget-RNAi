@@ -27,8 +27,8 @@ struct Contingency
     std::vector<unsigned> noKmerNoDN;
 };
 
-//qgram
-void qgramCounting(seqan::StringSet<seqan::DnaString> & kmers, Transcriptome & transcripts, Contingency & allContigs );
+// //qgram
+// void qgramCounting(seqan::StringSet<seqan::DnaString> & kmers, Transcriptome & transcripts, Contingency & allContigs );
 
 //indexed pattern matching
 void countFindsIndex (Contingency & allContigs, seqan::StringSet<seqan::DnaString> kmers, Transcriptome transcripts);

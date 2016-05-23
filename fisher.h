@@ -19,6 +19,7 @@ struct Results{
     //p-value, q-value=p-Value after multiple testing correction
     std::vector<double>pValue;
     std::vector<double>qValue;
+    std::vector<double>enrichment;
     //IDs of the downregulated mRNAs, where the kmer was found
     std::vector<std::string> mRNAIDs;
 };

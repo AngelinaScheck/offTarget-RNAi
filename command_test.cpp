@@ -3,10 +3,15 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
+#include <algorithm>
+#include <numeric>
+#include <sys/time.h>
 
 
 #include <seqan/sequence.h>
 #include <seqan/stream.h>
+#include <seqan/align.h>
+#include <seqan/index.h>
 
 #include "parse.h"
 #include "expLev.h"
@@ -15,6 +20,52 @@
 #include "kmers.h"
 #include "countFinds.h"
 #include "fisher.h"
+
+
+template <typename TStringSet, typename TIndexSpec>
+void qgramCounting(Transcriptome & transcripts, TStringSet & kmers, Contingency & contingencies, TIndexSpec)
+{
+    typedef seqan::Index<TStringSet, TIndexSpec> TIndex;
+
+    // build Index over mRNAs
+    timeval indexTime;
+    TStringSet set;
+    set=transcripts.mRNAset;
+    
+    gettimeofday(&indexTime, NULL);
+    double startIndex= (indexTime.tv_sec *1000000) + indexTime.tv_usec;
+    TIndex index(set);
+    indexRequire(index, seqan::QGramCounts());
+    gettimeofday(&indexTime, NULL);
+    double endIndex= (indexTime.tv_sec *1000000) + indexTime.tv_usec;
+    
+    std::cout << "Index for "<< length(set) << " mRNAs build in " << (endIndex-startIndex)/1000000  << " seconds" << '\n';
+
+    ////////////////////////////////////////////////////////////////////
+    //Indexed Pattern Matching
+    seqan::Finder<TIndex> finder(set);
+    for(unsigned int i=0; i < length(kmers); ++i){
+        clear(finder);
+        while (find(finder, kmers[i] ))
+        {
+            // getValueI1 returns index of a string in mRNAset, if mRNA is downregulated, the index is appended to idDN in the contingencies table at the position of the kmer
+            //if the mRNA is not downregulated, the id is appended to idNoDN at the position of the kmer in the contingencies
+            if (transcripts.isReg[getValueI1(beginPosition(finder))]){
+                contingencies.idDN[i].push_back(getValueI1(beginPosition(finder)));
+            }
+            else {
+                contingencies.idNoDN[i].push_back(getValueI1(beginPosition(finder)));
+            }
+        }
+    }
+    gettimeofday(&indexTime, NULL);
+    double endFind= (indexTime.tv_sec *1000000) + indexTime.tv_usec;
+    std::cout << length(kmers) << " kmers checked in " << (endFind-endIndex)/1000000  << " seconds with indexed pattern matching" << '\n';
+    
+}
+
+
+
 
 
 
@@ -88,26 +139,24 @@ int main(int argc, char const ** argv)
     //indexed pattern matching
     //countFindsIndex (contingencies, kmers,transcripts);
     //try qgram
-    //qgramCounting(kmers, transcripts, contingencies);
+    
+    qgramCounting(transcripts, kmers, contingencies, seqan::IndexQGram<seqan::UngappedShape<7> >() );
     
     //fill counters
-    countFinds (contingencies, kmers, transcripts);
+   //countFinds (contingencies, kmers, transcripts);
     //fill empty fields of contingency tables
     fillFields (contingencies, regulated, notRegulated);
     //decide if enrichment of kmers in downregulated mRNA is significant, create results
     Results results;
     significant(contingencies, options, nReg, nMRNAs, results, transcripts);
     //multiple testing correction (Benjamin Hochberg)
-    std::cout <<length(results.signfKmers)<<'\t' << "suspicous kmers before multiple testing correction" << '\n';
-    benjHoch (results, options);
+    std::cout <<length(results.signfKmers)<<'\t' << "suspicous kmers" << '\n';
+    //benjHoch (results, options);
     
     //print results to command line
-    std::cout <<length(results.signfKmers)<<'\t' << "suspicous kmers after multiple testing correction" << '\n';
-//     std::cout << "kmer" << '\t' << "p-Value" <<'\t' << "q-Value" <<'\t'<< "found in mRNA" << '\n';
+    std::cout << "rank" << '\t' << "kmer" <<'\t' << "score" <<'\n';
     for (unsigned i=0; i<results.kmerDN.size(); i++){
-        if(getValue(results.signfKmers, i)=="CUGCUGA"){
-        std::cout << i << '\n' /*<< results.pValue[i] << '\t' << results.qValue[i] <<'\t'<< results.mRNAIDs[i] << '\n'*/;
-        }
+        std::cout << "rank " << i+1 << '\t' << results.signfKmers[i] << '\t' << results.enrichment[i] << '\n';
             
     }
 

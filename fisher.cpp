@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <boost/math/distributions/hypergeometric.hpp>
+#include <math.h>
 
 #include "inputTransc.h"
 #include "countFinds.h"
@@ -23,6 +24,7 @@ void significant(Contingency & allContigs, ModifyStringOptions & options, unsign
     results.noKmerNoDN.reserve(s);
     results.pValue.reserve(s);
     results.qValue.reserve(s);
+    results.enrichment.reserve(s);
     results.mRNAIDs.reserve(s);
     //perform fisher's test on every Contingency Table
     for (unsigned i=0; i<s; i++){
@@ -38,8 +40,8 @@ void significant(Contingency & allContigs, ModifyStringOptions & options, unsign
         if(kmerIn>0){
             boost::math::hypergeometric_distribution<double> hg_dist (kmerIn, nReg, nMRNAs);
             pvalue=boost::math::cdf(boost::math::complement(hg_dist, allContigs.kmerDN[i]));
-            //add the kmer, its pvalue,IDs of mRNAs, where it was found to list of results if p-value is equal or smaller alpha/2
-            if(pvalue<alpha/2){
+            //add the kmer, its pvalue,IDs of mRNAs, where it was found to list of results if p-value is equal or smaller alpha/#kmers (Bonferroni correction)
+            if(pvalue<alpha/s){
                 //convert vector<unsigned> of positions of the mRNA in the transcriptome into string of the mRNA IDs 
                 //starting from 1 because of the -1 place holder
                 for(unsigned j=1; j<allContigs.idDN[i].size(); j++){
@@ -53,11 +55,14 @@ void significant(Contingency & allContigs, ModifyStringOptions & options, unsign
                 results.noKmerNoDN.push_back(allContigs.noKmerNoDN[i]);
                 results.pValue.push_back(pvalue);
                 results.qValue.push_back(pvalue);
+                double enrichment= (log10(pvalue)) * (-1) ;
+                results.enrichment.push_back (enrichment);
                 results.mRNAIDs.push_back(mRNAIDs);
                 mRNAIDs.clear();
             }
         }
     }
+    quickSort(results, 0, results.kmerDN.size()-1);
 }
 
 //______________________________________________________________________________________________________________________________________________________________
@@ -65,8 +70,6 @@ void significant(Contingency & allContigs, ModifyStringOptions & options, unsign
 void benjHoch (Results & results, ModifyStringOptions & options){
     //signficance level
     double alpha = options.signf;
-    //sort results by p-value (quicksort)
-    quickSort(results, 0, results.kmerDN.size()-1);
     //according to Benjamin Hochber all kmers with qValue=alpha*rank(pValue)/#entries<= pVale are significant
     
     //calculate qValue for kmers, delete if qValue>pValue
@@ -104,6 +107,7 @@ void quickSort(Results & results, unsigned left, unsigned right){
     int tempNoKmerNoDN;
     double tempPValue;
     double tempQValue;
+    double tempEnrichment;
     std::string tempMRNAID;
     
     //divide and conq.
@@ -132,6 +136,7 @@ void quickSort(Results & results, unsigned left, unsigned right){
             tempNoKmerNoDN = results.noKmerNoDN[i];
             tempPValue = results.pValue[i];
             tempQValue = results.qValue[i];
+            tempEnrichment = results.enrichment[i];
             tempMRNAID = results.mRNAIDs[i];
             
             //swap
@@ -142,6 +147,7 @@ void quickSort(Results & results, unsigned left, unsigned right){
             results.noKmerNoDN[i] = results.noKmerNoDN[j];
             results.pValue[i] = results.pValue[j];
             results.qValue[i] = results.qValue[j];
+            results.enrichment[i] = results.enrichment[j];
             results.mRNAIDs[i] = results.mRNAIDs[j];
             
             assignValue(results.signfKmers, j, tempSignfKmer);
@@ -151,6 +157,7 @@ void quickSort(Results & results, unsigned left, unsigned right){
             results.noKmerNoDN[j] = tempNoKmerNoDN;
             results.pValue[j] = tempPValue;
             results.qValue[j] = tempQValue;
+            results.enrichment[j] = tempEnrichment;
             results.mRNAIDs[j] = tempMRNAID;
             
             //continue
