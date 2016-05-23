@@ -1,0 +1,1 @@
+/usr/bin/c++   -std=c++11    CMakeFiles/command_test.dir/command_test.cpp.o CMakeFiles/command_test.dir/parse.cpp.o CMakeFiles/command_test.dir/inputTransc.cpp.o CMakeFiles/command_test.dir/kmers.cpp.o CMakeFiles/command_test.dir/countFinds.cpp.o CMakeFiles/command_test.dir/fisher.cpp.o  -o command_test -rdynamic -lrt -lpthread -lz 
