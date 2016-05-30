@@ -18,6 +18,8 @@ struct ModifyStringOptions
     int k;
     //significance level alpha
     double signf;
+    //Output
+    std::string output;
 };
 
 seqan::ArgumentParser::ParseResult

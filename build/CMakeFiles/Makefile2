@@ -53,38 +53,38 @@ CMAKE_SOURCE_DIR = /home/norbert/workspace/off-target-effects_Seqan/Coding/githu
 CMAKE_BINARY_DIR = /home/norbert/workspace/off-target-effects_Seqan/Coding/github/build
 
 #=============================================================================
-# Target rules for target CMakeFiles/command_test.dir
+# Target rules for target CMakeFiles/rnai.dir
 
 # All Build rule for target.
-CMakeFiles/command_test.dir/all:
-	$(MAKE) -f CMakeFiles/command_test.dir/build.make CMakeFiles/command_test.dir/depend
-	$(MAKE) -f CMakeFiles/command_test.dir/build.make CMakeFiles/command_test.dir/build
+CMakeFiles/rnai.dir/all:
+	$(MAKE) -f CMakeFiles/rnai.dir/build.make CMakeFiles/rnai.dir/depend
+	$(MAKE) -f CMakeFiles/rnai.dir/build.make CMakeFiles/rnai.dir/build
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/norbert/workspace/off-target-effects_Seqan/Coding/github/build/CMakeFiles  1 2 3 4 5 6
-	@echo "Built target command_test"
-.PHONY : CMakeFiles/command_test.dir/all
+	@echo "Built target rnai"
+.PHONY : CMakeFiles/rnai.dir/all
 
 # Include target in all.
-all: CMakeFiles/command_test.dir/all
+all: CMakeFiles/rnai.dir/all
 .PHONY : all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/command_test.dir/rule: cmake_check_build_system
+CMakeFiles/rnai.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/norbert/workspace/off-target-effects_Seqan/Coding/github/build/CMakeFiles 6
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/command_test.dir/all
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/rnai.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/norbert/workspace/off-target-effects_Seqan/Coding/github/build/CMakeFiles 0
-.PHONY : CMakeFiles/command_test.dir/rule
+.PHONY : CMakeFiles/rnai.dir/rule
 
 # Convenience name for target.
-command_test: CMakeFiles/command_test.dir/rule
-.PHONY : command_test
+rnai: CMakeFiles/rnai.dir/rule
+.PHONY : rnai
 
 # clean rule for target.
-CMakeFiles/command_test.dir/clean:
-	$(MAKE) -f CMakeFiles/command_test.dir/build.make CMakeFiles/command_test.dir/clean
-.PHONY : CMakeFiles/command_test.dir/clean
+CMakeFiles/rnai.dir/clean:
+	$(MAKE) -f CMakeFiles/rnai.dir/build.make CMakeFiles/rnai.dir/clean
+.PHONY : CMakeFiles/rnai.dir/clean
 
 # clean rule for target.
-clean: CMakeFiles/command_test.dir/clean
+clean: CMakeFiles/rnai.dir/clean
 .PHONY : clean
 
 #=============================================================================

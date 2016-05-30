@@ -1,1 +1,1 @@
-/home/norbert/workspace/off-target-effects_Seqan/Coding/github/build/CMakeFiles/command_test.dir
+/home/norbert/workspace/off-target-effects_Seqan/Coding/github/build/CMakeFiles/rnai.dir

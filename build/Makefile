@@ -102,48 +102,24 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named command_test
+# Target rules for targets named rnai
 
 # Build rule for target.
-command_test: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 command_test
-.PHONY : command_test
+rnai: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 rnai
+.PHONY : rnai
 
 # fast build rule for target.
-command_test/fast:
-	$(MAKE) -f CMakeFiles/command_test.dir/build.make CMakeFiles/command_test.dir/build
-.PHONY : command_test/fast
-
-command_test.o: command_test.cpp.o
-.PHONY : command_test.o
-
-# target to build an object file
-command_test.cpp.o:
-	$(MAKE) -f CMakeFiles/command_test.dir/build.make CMakeFiles/command_test.dir/command_test.cpp.o
-.PHONY : command_test.cpp.o
-
-command_test.i: command_test.cpp.i
-.PHONY : command_test.i
-
-# target to preprocess a source file
-command_test.cpp.i:
-	$(MAKE) -f CMakeFiles/command_test.dir/build.make CMakeFiles/command_test.dir/command_test.cpp.i
-.PHONY : command_test.cpp.i
-
-command_test.s: command_test.cpp.s
-.PHONY : command_test.s
-
-# target to generate assembly for a file
-command_test.cpp.s:
-	$(MAKE) -f CMakeFiles/command_test.dir/build.make CMakeFiles/command_test.dir/command_test.cpp.s
-.PHONY : command_test.cpp.s
+rnai/fast:
+	$(MAKE) -f CMakeFiles/rnai.dir/build.make CMakeFiles/rnai.dir/build
+.PHONY : rnai/fast
 
 countFinds.o: countFinds.cpp.o
 .PHONY : countFinds.o
 
 # target to build an object file
 countFinds.cpp.o:
-	$(MAKE) -f CMakeFiles/command_test.dir/build.make CMakeFiles/command_test.dir/countFinds.cpp.o
+	$(MAKE) -f CMakeFiles/rnai.dir/build.make CMakeFiles/rnai.dir/countFinds.cpp.o
 .PHONY : countFinds.cpp.o
 
 countFinds.i: countFinds.cpp.i
@@ -151,7 +127,7 @@ countFinds.i: countFinds.cpp.i
 
 # target to preprocess a source file
 countFinds.cpp.i:
-	$(MAKE) -f CMakeFiles/command_test.dir/build.make CMakeFiles/command_test.dir/countFinds.cpp.i
+	$(MAKE) -f CMakeFiles/rnai.dir/build.make CMakeFiles/rnai.dir/countFinds.cpp.i
 .PHONY : countFinds.cpp.i
 
 countFinds.s: countFinds.cpp.s
@@ -159,7 +135,7 @@ countFinds.s: countFinds.cpp.s
 
 # target to generate assembly for a file
 countFinds.cpp.s:
-	$(MAKE) -f CMakeFiles/command_test.dir/build.make CMakeFiles/command_test.dir/countFinds.cpp.s
+	$(MAKE) -f CMakeFiles/rnai.dir/build.make CMakeFiles/rnai.dir/countFinds.cpp.s
 .PHONY : countFinds.cpp.s
 
 fisher.o: fisher.cpp.o
@@ -167,7 +143,7 @@ fisher.o: fisher.cpp.o
 
 # target to build an object file
 fisher.cpp.o:
-	$(MAKE) -f CMakeFiles/command_test.dir/build.make CMakeFiles/command_test.dir/fisher.cpp.o
+	$(MAKE) -f CMakeFiles/rnai.dir/build.make CMakeFiles/rnai.dir/fisher.cpp.o
 .PHONY : fisher.cpp.o
 
 fisher.i: fisher.cpp.i
@@ -175,7 +151,7 @@ fisher.i: fisher.cpp.i
 
 # target to preprocess a source file
 fisher.cpp.i:
-	$(MAKE) -f CMakeFiles/command_test.dir/build.make CMakeFiles/command_test.dir/fisher.cpp.i
+	$(MAKE) -f CMakeFiles/rnai.dir/build.make CMakeFiles/rnai.dir/fisher.cpp.i
 .PHONY : fisher.cpp.i
 
 fisher.s: fisher.cpp.s
@@ -183,7 +159,7 @@ fisher.s: fisher.cpp.s
 
 # target to generate assembly for a file
 fisher.cpp.s:
-	$(MAKE) -f CMakeFiles/command_test.dir/build.make CMakeFiles/command_test.dir/fisher.cpp.s
+	$(MAKE) -f CMakeFiles/rnai.dir/build.make CMakeFiles/rnai.dir/fisher.cpp.s
 .PHONY : fisher.cpp.s
 
 inputTransc.o: inputTransc.cpp.o
@@ -191,7 +167,7 @@ inputTransc.o: inputTransc.cpp.o
 
 # target to build an object file
 inputTransc.cpp.o:
-	$(MAKE) -f CMakeFiles/command_test.dir/build.make CMakeFiles/command_test.dir/inputTransc.cpp.o
+	$(MAKE) -f CMakeFiles/rnai.dir/build.make CMakeFiles/rnai.dir/inputTransc.cpp.o
 .PHONY : inputTransc.cpp.o
 
 inputTransc.i: inputTransc.cpp.i
@@ -199,7 +175,7 @@ inputTransc.i: inputTransc.cpp.i
 
 # target to preprocess a source file
 inputTransc.cpp.i:
-	$(MAKE) -f CMakeFiles/command_test.dir/build.make CMakeFiles/command_test.dir/inputTransc.cpp.i
+	$(MAKE) -f CMakeFiles/rnai.dir/build.make CMakeFiles/rnai.dir/inputTransc.cpp.i
 .PHONY : inputTransc.cpp.i
 
 inputTransc.s: inputTransc.cpp.s
@@ -207,7 +183,7 @@ inputTransc.s: inputTransc.cpp.s
 
 # target to generate assembly for a file
 inputTransc.cpp.s:
-	$(MAKE) -f CMakeFiles/command_test.dir/build.make CMakeFiles/command_test.dir/inputTransc.cpp.s
+	$(MAKE) -f CMakeFiles/rnai.dir/build.make CMakeFiles/rnai.dir/inputTransc.cpp.s
 .PHONY : inputTransc.cpp.s
 
 kmers.o: kmers.cpp.o
@@ -215,7 +191,7 @@ kmers.o: kmers.cpp.o
 
 # target to build an object file
 kmers.cpp.o:
-	$(MAKE) -f CMakeFiles/command_test.dir/build.make CMakeFiles/command_test.dir/kmers.cpp.o
+	$(MAKE) -f CMakeFiles/rnai.dir/build.make CMakeFiles/rnai.dir/kmers.cpp.o
 .PHONY : kmers.cpp.o
 
 kmers.i: kmers.cpp.i
@@ -223,7 +199,7 @@ kmers.i: kmers.cpp.i
 
 # target to preprocess a source file
 kmers.cpp.i:
-	$(MAKE) -f CMakeFiles/command_test.dir/build.make CMakeFiles/command_test.dir/kmers.cpp.i
+	$(MAKE) -f CMakeFiles/rnai.dir/build.make CMakeFiles/rnai.dir/kmers.cpp.i
 .PHONY : kmers.cpp.i
 
 kmers.s: kmers.cpp.s
@@ -231,7 +207,7 @@ kmers.s: kmers.cpp.s
 
 # target to generate assembly for a file
 kmers.cpp.s:
-	$(MAKE) -f CMakeFiles/command_test.dir/build.make CMakeFiles/command_test.dir/kmers.cpp.s
+	$(MAKE) -f CMakeFiles/rnai.dir/build.make CMakeFiles/rnai.dir/kmers.cpp.s
 .PHONY : kmers.cpp.s
 
 parse.o: parse.cpp.o
@@ -239,7 +215,7 @@ parse.o: parse.cpp.o
 
 # target to build an object file
 parse.cpp.o:
-	$(MAKE) -f CMakeFiles/command_test.dir/build.make CMakeFiles/command_test.dir/parse.cpp.o
+	$(MAKE) -f CMakeFiles/rnai.dir/build.make CMakeFiles/rnai.dir/parse.cpp.o
 .PHONY : parse.cpp.o
 
 parse.i: parse.cpp.i
@@ -247,7 +223,7 @@ parse.i: parse.cpp.i
 
 # target to preprocess a source file
 parse.cpp.i:
-	$(MAKE) -f CMakeFiles/command_test.dir/build.make CMakeFiles/command_test.dir/parse.cpp.i
+	$(MAKE) -f CMakeFiles/rnai.dir/build.make CMakeFiles/rnai.dir/parse.cpp.i
 .PHONY : parse.cpp.i
 
 parse.s: parse.cpp.s
@@ -255,8 +231,32 @@ parse.s: parse.cpp.s
 
 # target to generate assembly for a file
 parse.cpp.s:
-	$(MAKE) -f CMakeFiles/command_test.dir/build.make CMakeFiles/command_test.dir/parse.cpp.s
+	$(MAKE) -f CMakeFiles/rnai.dir/build.make CMakeFiles/rnai.dir/parse.cpp.s
 .PHONY : parse.cpp.s
+
+rnai.o: rnai.cpp.o
+.PHONY : rnai.o
+
+# target to build an object file
+rnai.cpp.o:
+	$(MAKE) -f CMakeFiles/rnai.dir/build.make CMakeFiles/rnai.dir/rnai.cpp.o
+.PHONY : rnai.cpp.o
+
+rnai.i: rnai.cpp.i
+.PHONY : rnai.i
+
+# target to preprocess a source file
+rnai.cpp.i:
+	$(MAKE) -f CMakeFiles/rnai.dir/build.make CMakeFiles/rnai.dir/rnai.cpp.i
+.PHONY : rnai.cpp.i
+
+rnai.s: rnai.cpp.s
+.PHONY : rnai.s
+
+# target to generate assembly for a file
+rnai.cpp.s:
+	$(MAKE) -f CMakeFiles/rnai.dir/build.make CMakeFiles/rnai.dir/rnai.cpp.s
+.PHONY : rnai.cpp.s
 
 # Help Target
 help:
@@ -264,12 +264,9 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
+	@echo "... rnai"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... command_test"
-	@echo "... command_test.o"
-	@echo "... command_test.i"
-	@echo "... command_test.s"
 	@echo "... countFinds.o"
 	@echo "... countFinds.i"
 	@echo "... countFinds.s"
@@ -285,6 +282,9 @@ help:
 	@echo "... parse.o"
 	@echo "... parse.i"
 	@echo "... parse.s"
+	@echo "... rnai.o"
+	@echo "... rnai.i"
+	@echo "... rnai.s"
 .PHONY : help
 
 

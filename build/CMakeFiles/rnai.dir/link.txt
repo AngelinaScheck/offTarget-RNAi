@@ -1,0 +1,1 @@
+/usr/bin/c++   -std=c++11    CMakeFiles/rnai.dir/rnai.cpp.o CMakeFiles/rnai.dir/parse.cpp.o CMakeFiles/rnai.dir/inputTransc.cpp.o CMakeFiles/rnai.dir/kmers.cpp.o CMakeFiles/rnai.dir/countFinds.cpp.o CMakeFiles/rnai.dir/fisher.cpp.o  -o rnai -rdynamic -lrt -lpthread -lz 

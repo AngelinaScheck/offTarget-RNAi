@@ -98,7 +98,7 @@ CMAKE_OBJCOPY:FILEPATH=/usr/bin/objcopy
 CMAKE_OBJDUMP:FILEPATH=/usr/bin/objdump
 
 //Value Computed by CMake
-CMAKE_PROJECT_NAME:STATIC=command_test
+CMAKE_PROJECT_NAME:STATIC=rnai
 
 //Path to a program.
 CMAKE_RANLIB:FILEPATH=/usr/bin/ranlib
@@ -172,6 +172,12 @@ command_test_BINARY_DIR:STATIC=/home/norbert/workspace/off-target-effects_Seqan/
 
 //Value Computed by CMake
 command_test_SOURCE_DIR:STATIC=/home/norbert/workspace/off-target-effects_Seqan/Coding/github
+
+//Value Computed by CMake
+rnai_BINARY_DIR:STATIC=/home/norbert/workspace/off-target-effects_Seqan/Coding/github/build
+
+//Value Computed by CMake
+rnai_SOURCE_DIR:STATIC=/home/norbert/workspace/off-target-effects_Seqan/Coding/github
 
 
 ########################

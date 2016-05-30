@@ -43,5 +43,5 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/command_test.dir/DependInfo.cmake"
+  "CMakeFiles/rnai.dir/DependInfo.cmake"
   )

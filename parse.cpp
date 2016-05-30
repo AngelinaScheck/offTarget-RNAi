@@ -12,6 +12,12 @@ parseCommandLine(ModifyStringOptions & options, int argc, char const ** argv)
         //ArgumentParser
     seqan::ArgumentParser parser("input");
     
+    //output filename
+    addOption(parser, seqan::ArgParseOption(
+        "o", "output", "Name of output file",
+        seqan::ArgParseArgument::STRING, "OUTPUT"));
+    setDefaultValue(parser, "output", "output");
+    
     //filename preprocessed expression list with mRNA sequences
     addOption(parser, seqan::ArgParseOption(
         "pre", "preprocessed", "Name of the preprocessed transcriptome data",
@@ -67,6 +73,7 @@ parseCommandLine(ModifyStringOptions & options, int argc, char const ** argv)
     }
    
     //assign parsed arguments
+    getOptionValue(options.output, parser, "output");
     getOptionValue(options.preprocessed, parser, "preprocessed");
     getOptionValue(options.expression, parser, "expression");
     getOptionValue(options.sequences, parser, "sequences");
